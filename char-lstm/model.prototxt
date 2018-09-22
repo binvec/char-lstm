@@ -1,0 +1,132 @@
+layer {
+	name: "Input"
+	type: "Input"
+	top: "data"
+	top: "clip"
+	top: "label"
+	input_param {
+		shape {
+			dim: 32				#  sequence_length
+			dim: 32				#  batch_size
+		}
+		shape {
+			dim: 32				
+			dim: 32       
+		}
+		shape {
+			dim: 1024	     	# sequence_length * batch_size 
+			dim: 1
+		}
+	}
+}
+
+layer {
+	name: "Embedding"
+	type: "Embed"
+	bottom: "data"
+	top: "embedding"
+	embed_param {
+		num_output: 100			
+		input_dim: 5382			# vocabulary_size
+  }
+}
+
+layer {
+	name: "LSTM1"
+	type: "LSTM"
+	bottom: "embedding"
+	bottom: "clip"
+	top: "lstm1"
+	recurrent_param {
+		num_output: 512
+		weight_filler {
+            type: "xavier"
+		}
+		bias_filler {
+			type: "constant"
+			value: 0
+		}
+  }
+}
+
+layer {
+	name: "Dropout1"
+	type: "Dropout"
+	bottom: "lstm1"
+	top: "lstm1_dropout"
+	dropout_param {
+		dropout_ratio: 0.3
+	}
+}
+
+layer {
+	name: "LSTM2"
+	type: "LSTM"
+	bottom: "lstm1_dropout"
+	bottom: "clip"
+	top: "lstm2"
+	recurrent_param {
+		num_output: 512
+		weight_filler {
+            type: "xavier"
+		}
+		bias_filler {
+			type: "constant"
+			value: 0
+		}
+  }
+}
+
+layer {
+	name: "Dropout2"
+	type: "Dropout"
+	bottom: "lstm2"
+	top: "lstm2_dropout"
+	dropout_param {
+		dropout_ratio: 0.3
+	}
+}
+
+layer {
+	name: "Reshape_lstm2"
+	type: "Reshape"
+	bottom: "lstm2_dropout"
+	top: "lstm2_reshaped"
+	reshape_param {
+		shape {
+			dim: -1
+			dim: 1
+			dim: 512		    # lstm2 num_output
+		}
+	}
+	include {
+        phase: TRAIN
+    }
+
+}
+
+layer {
+	name: "ip"
+	type: "InnerProduct"
+	bottom: "lstm2_reshaped"
+	top: "ip1"
+	inner_product_param {
+		num_output: 5382		# vocabulary_size
+		weight_filler {
+			type: "gaussian"
+			std: 0.1
+		}
+		bias_filler {
+			type: "constant"
+		}
+	}
+}
+
+
+layer {
+  name: "Loss"
+  type: "SoftmaxWithLoss"
+  bottom: "ip1"
+  bottom: "label"
+  top: "loss"
+}

@@ -1,0 +1,49 @@
+#pragma once
+#include <caffe/caffe.hpp>
+#include <caffe/solver.hpp>
+#include <caffe/common.hpp>
+#include <caffe/sgd_solvers.hpp>
+#include <caffe/layers/silence_layer.hpp>
+#include <caffe/layers/inner_product_layer.hpp>
+#include <caffe/layers/euclidean_loss_layer.hpp>
+#include <caffe/layers/sigmoid_cross_entropy_loss_layer.hpp>
+#include <caffe/layers/memory_data_layer.hpp>
+#include <caffe/layers/reshape_layer.hpp>
+#include <caffe/layers/softmax_loss_layer.hpp>
+#include <caffe/layers/input_layer.hpp>
+#include <caffe/layers/reduction_layer.hpp>
+#include <caffe/layers/recurrent_layer.hpp>
+#include <caffe/layers/lstm_layer.hpp>
+#include <caffe/layers/embed_layer.hpp>
+#include <caffe/layers/slice_layer.hpp>
+#include <caffe/layers/scale_layer.hpp>
+#include <caffe/layers/dropout_layer.hpp>
+#include <caffe/layers/concat_layer.hpp>
+
+namespace caffe
+{
+	extern INSTANTIATE_CLASS(SGDSolver);
+	extern INSTANTIATE_CLASS(AdaDeltaSolver);
+	extern INSTANTIATE_CLASS(AdaGradSolver);
+	extern INSTANTIATE_CLASS(AdamSolver);
+	extern INSTANTIATE_CLASS(NesterovSolver);
+	extern INSTANTIATE_CLASS(RMSPropSolver);
+
+	extern INSTANTIATE_CLASS(InnerProductLayer);
+	extern INSTANTIATE_CLASS(InputLayer);
+	extern INSTANTIATE_CLASS(SigmoidCrossEntropyLossLayer);
+	extern INSTANTIATE_CLASS(MemoryDataLayer);
+	extern INSTANTIATE_CLASS(SilenceLayer);
+	extern INSTANTIATE_CLASS(ReshapeLayer);
+	extern INSTANTIATE_CLASS(EuclideanLossLayer);
+	extern INSTANTIATE_CLASS(SoftmaxWithLossLayer);
+	extern INSTANTIATE_CLASS(ReductionLayer);
+	extern INSTANTIATE_CLASS(RecurrentLayer);
+	extern INSTANTIATE_CLASS(LSTMLayer);
+	extern INSTANTIATE_CLASS(EmbedLayer);
+	extern INSTANTIATE_CLASS(SliceLayer);
+	extern INSTANTIATE_CLASS(ScaleLayer);
+	extern INSTANTIATE_CLASS(DropoutLayer);
+	extern INSTANTIATE_CLASS(LSTMUnitLayer);
+	extern INSTANTIATE_CLASS(ConcatLayer);
+}

@@ -1,0 +1,9 @@
+net: "model.prototxt"
+base_lr: 0.005
+momentum: 0.9
+lr_policy: "fixed"
+
+max_iter: 100000
+display: 100
+snapshot: 15000
+snapshot_prefix: "char-lstm"
