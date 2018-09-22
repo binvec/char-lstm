@@ -1,5 +1,5 @@
 # char-lstm
-Windows环境下使用caffe框架构建LSTM网络生成（没有感情的）古诗。 ~~我，莫得感情~~
+Windows环境下使用caffe框架构建LSTM网络生成（没有感情的 && 意义不明的）古诗。 ~~我，莫得感情~~
 
 你需要自己在Windows环境下编译caffe，并在项目属性中配置
 
